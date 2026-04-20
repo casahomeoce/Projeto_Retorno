@@ -39,7 +39,7 @@ col3.plotly_chart(fig_citu)
 
 
 # OS e DEFEITO de cada produto que volta do ML
-colunas = ["OS", "PRODUTO-", "DEFEITO", "STATOS"]
+colunas = ["OS", "PRODUTO-", "DEFEITO", "ASSESORIOS", "STATOS"]
 df_filtrado = df[colunas]
 
 st.title("Produtos que podem ser revendidos")
