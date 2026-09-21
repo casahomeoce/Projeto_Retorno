@@ -38,6 +38,7 @@ col3.plotly_chart(fig_citu)
 
 
 
+# informações que serão filtradas
 # OS e DEFEITO de cada produto que volta do ML
 colunas = ["OS", "PRODUTO-", "DEFEITO", "ASSESORIOS", "STATOS"]
 df_filtrado = df[colunas]
