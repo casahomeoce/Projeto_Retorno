@@ -17,7 +17,7 @@ df["MES"] = df["DATA"].dt.strftime("%m-%Y")
 df = df.sort_values("DATA")
 
 # MES
-mes = st.sidebar.selectbox("Mês", sorted(df["MES"].unique()))
+mes = st.sidebar.selectbox("MÊS", sorted(df["MES"].unique()))
 
 # Filtro
 df_filtro = df[df["MES"] == mes]
@@ -40,21 +40,21 @@ col3.plotly_chart(fig_citu)
 
 # informações que serão filtradas
 # OS e DEFEITO de cada produto que volta do ML
-colunas = ["OS", "PRODUTO-", "DEFEITO", "ASSESORIOS", "STATOS"]
+colunas = ["OS", "PRODUTO-", "DEFEITO", "ASSESORIOS", "CATEGORIA"]
 df_filtrado = df[colunas]
 
 st.title("Produtos que podem ser revendidos")
 
 # Filtros
 defeito = st.selectbox("Selecione o defeito", ["Todos"] + sorted(df_filtrado["DEFEITO"].dropna().unique().tolist()))
-status = st.selectbox("Selecione o Status", ["Todos"] + sorted(df_filtrado["STATOS"].dropna().unique().tolist()))
+status = st.selectbox("Selecione o Status", ["Todos"] + sorted(df_filtrado["CATEGORIA"].dropna().unique().tolist()))
 
 # Aplicação de  filtros
 df_exibir = df_filtrado.copy()
 if defeito != "Todos":
     df_exibir = df_exibir[df_exibir["DEFEITO"] == defeito]
 if status != "Todos":
-    df_exibir = df_exibir[df_exibir["STATOS"] == status]
+    df_exibir = df_exibir[df_exibir["CATEGORIA"] == status]
 
 # Exibir tabelas
 st.dataframe(df_exibir)
@@ -62,4 +62,4 @@ st.dataframe(df_exibir)
 
 # Totais agrupados
 st.subheader("Totais de produtos e status")
-st.dataframe(df_exibir.groupby(["PRODUTO-", "STATOS"]).size().reset_index(name="Quantidade"))
+st.dataframe(df_exibir.groupby(["PRODUTO-", "CATEGORIA"]).size().reset_index(name="Quantidade"))
